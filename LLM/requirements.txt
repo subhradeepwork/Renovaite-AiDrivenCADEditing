@@ -1,0 +1,14 @@
+fastapi==0.112.0
+uvicorn==0.30.5
+openai==1.40.0
+pydantic==2.8.2
+qdrant-client==1.9.1
+httpx==0.27.0
+python-dotenv==1.0.1
+
+# Optional helpers (safe to keep)
+tqdm==4.66.4
+numpy==1.26.4
+aiofiles==23.2.1
+pymupdf==1.24.4
+langchain==0.2.11

@@ -1,0 +1,151 @@
+{
+  "version": "1.0",
+  "description": "AI Instruction schema for Unity object manipulation with basic and composite actions.",
+  "type": "object",
+  "required": [
+    "action",
+    "target",
+    "modification"
+  ],
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "scale",
+        "move",
+        "rotate",
+        "replace",
+        "material",
+        "delete",
+        "composite"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "name",
+        "unique_id"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "unique_id": {
+          "type": "string"
+        }
+      }
+    },
+    "modification": {
+      "type": "object",
+      "properties": {
+        "scale": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "position": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "rotation": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          }
+        },
+        "material": {
+          "type": "string"
+        },
+        "replace_with": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "material": {
+              "type": "string"
+            },
+            "scale": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "z": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "instructions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "action"
+            ],
+            "properties": {
+              "action": {
+                "type": "string"
+              },
+              "object_type": {
+                "type": "string"
+              },
+              "shape": {
+                "type": "string"
+              },
+              "dimensions": {
+                "type": "object",
+                "properties": {
+                  "width": {
+                    "type": "number"
+                  },
+                  "height": {
+                    "type": "number"
+                  }
+                }
+              },
+              "position": {
+                "type": "string"
+              },
+              "material": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
