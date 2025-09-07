@@ -44,26 +44,24 @@ The result is an operator-in-the-loop system that blends LLM flexibility with ve
 2. [System Architecture](#system-architecture)  
    - [High-Level Diagram](#high-level-diagram)  
    - [Runtime Flow](#runtime-flow)  
-3. [Folder Structure](#folder-structure)  
-4. [Data Contracts](#data-contracts)  
+3. [Data Contracts](#data-contracts)  
    - [Instruction JSON](#instruction-json)  
    - [Selection Block](#selection-block)  
-5. [Backend Services (Python + Qdrant)](#backend-services-python--qdrant)  
-6. [Unity Integration](#unity-integration)  
+4. [Backend Services (Python + Qdrant)](#backend-services-python--qdrant)  
+5. [Unity Integration](#unity-integration)  
    - [Core Components](#core-components)  
    - [Execution Appliers](#execution-appliers)  
    - [Preview UX](#preview-ux)  
    - [IFC & Selection Utilities](#ifc--selection-utilities)  
-7. [Setup & Run](#setup--run)  
+6. [Setup & Run](#setup--run)  
    - [Prerequisites](#prerequisites)  
    - [Backend setup](#backend-setup)  
    - [Unity setup](#unity-setup)  
    - [End-to-End sanity test](#end-to-end-sanity-test)  
-8. [Extensibility](#extensibility)  
-9. [Troubleshooting](#troubleshooting)  
-10. [Roadmap](#roadmap)  
-11. [Contributing](#contributing)  
-12. [License](#license)
+7. [Extensibility](#extensibility)  
+8. [Troubleshooting](#troubleshooting)  
+9. [Roadmap](#roadmap)  
+10. [Contributing](#contributing) 
 
 ---
 
@@ -115,109 +113,6 @@ AIClient ──► PromptBuilder + ToolSchemaProvider ──► OpenAI (tool-cal
 7. **Preview**: Highlight all affected targets, show human-readable change list; user accepts/rejects.  
 8. **Apply**: InstructionExecutor calls the correct Applier(s).  
 9. **Indexing**: QdrantSelectionListener keeps target objects up-to-date in the vector DB on selection.
-
----
-
-## Folder Structure
-
-> This structure mirrors how the code is organized for readability and low coupling.
-
-```
-Assets/_Scripts/
-├─ AI/
-│  ├─ Core/                         # orchestration
-│  │  ├─ AIClient.cs
-│  │  ├─ InstructionDispatcher.cs
-│  │  └─ TargetResolver.cs
-│  ├─ Instructions/
-│  │  ├─ Interfaces/                # contracts
-│  │  │  ├─ IInstructionValidator.cs
-│  │  │  └─ IInstructionNormalizer.cs
-│  │  ├─ Models/                    # DTOs
-│  │  │  ├─ AIInstructionSchema.cs
-│  │  │  └─ AIInstruction.cs
-│  │  ├─ Validation/                # checks
-│  │  │  └─ AIInstructionValidator.cs
-│  │  ├─ Normalization/             # canonicalization
-│  │  │  └─ AIInstructionNormalizer.cs
-│  │  └─ Heuristics/
-│  │     └─ SelectionHeuristic.cs
-│  ├─ OpenAI/                       # LLM plumbing
-│  │  ├─ PromptBuilder.cs
-│  │  ├─ ToolSchemaProvider.cs
-│  │  ├─ ResponseParser.cs
-│  │  └─ IOpenAIClient.cs
-│  ├─ Prompting/
-│  │  ├─ ObjectJsonCompactor.cs
-│  │  └─ RagCompactor.cs
-│  ├─ RAG/
-│  │  └─ RagContextBuilder.cs
-│  ├─ Qdrant/
-│  │  ├─ QdrantApiClient.cs
-│  │  ├─ QdrantUpsertBuilder.cs
-│  │  ├─ QdrantSelectionListener.cs
-│  │  └─ QdrantSettings.cs
-│  └─ Execution/                    # effectors
-│     ├─ Core/
-│     │  ├─ ActionApplierBase.cs
-│     │  ├─ InstructionExecutor.cs
-│     │  └─ IInstructionExecutor.cs
-│     ├─ Transform/
-│     │  ├─ MoveApplier.cs
-│     │  ├─ RotateApplier.cs
-│     │  └─ ScaleApplier.cs
-│     ├─ Materials/
-│     │  ├─ MaterialApplier.cs
-│     │  ├─ MaterialLibrary.cs
-│     │  └─ MaterialResolver.cs
-│     ├─ Replace/
-│     │  └─ ReplaceApplier.cs
-│     └─ Delete/
-│        └─ DeleteApplier.cs
-│
-├─ Preview/
-│  ├─ ChangeSet.cs
-│  ├─ PendingChangesController.cs
-│  └─ OutlineHighlighter.cs
-│
-├─ IFC/
-│  ├─ IFCInitializer.cs
-│  ├─ IfcPropertyExtractor.cs
-│  └─ UniqueIdExtractor.cs
-│
-├─ SceneIO/
-│  ├─ ObjectStructureSerializer.cs
-│  ├─ ObjectSummaryExporter.cs
-│  └─ ChatDTOs.cs
-│
-├─ Selection/
-│  ├─ SelectionManager.cs
-│  └─ SelectableObject.cs
-│
-├─ Geometry/
-│  ├─ MeshSummarizer.cs
-│  └─ MeshBuilder.cs
-│
-├─ UI/
-│  └─ PendingChangesPanel.cs
-│
-├─ Infrastructure/
-│  └─ ObjectRegistry.cs
-│
-└─ UnityOnly/
-   ├─ CameraOrbitController.cs
-   ├─ ChatManager.cs
-   ├─ InstructionInputUI.cs
-   └─ AutoSetupIfcModel.cs
-```
-
-> Backend (Python) lives alongside the Unity project (outside `Assets/`), for example:
-```
-backend/
-├─ api.py              # FastAPI (Qdrant proxy)
-├─ embeddings.py       # OpenAI embeddings + fallback
-└─ index_qdrant.py     # batch indexer for exported object summaries
-```
 
 ---
 
@@ -441,12 +336,6 @@ Attach **InstructionExecutor** to a scene object and assign the Appliers in the 
 2. Use folder-mirrored **namespaces** (e.g., `RenovAite.AI.Execution.Transform`).  
 3. Add tests or scene repros for new features if possible.  
 4. Open a PR with a clear summary, screenshots/GIFs for UX.
-
----
-
-## License
-
-_Add your preferred license here (e.g., MIT, Apache-2.0)._
 
 ---
 
