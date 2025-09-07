@@ -3,7 +3,7 @@ The goal: make complex CAD/BIM edits as simple as a conversation, and remove the
 
 RenovAite turns natural language into precise, validated edit operations on architectural models in Unity. It fuses **IFC/BIM metadata**, **RAG search with Qdrant**, and **OpenAI tool-calling** to perform actions like _scale, move, rotate, material, replace, delete_ across single or multiple targets (e.g., “scale all **similar** exterior concrete walls by 10cm”).
 
-![FirstImage](https://github.com/subhradeepwork/GenAiBuild/blob/Development-UnityVersionChanged/GIFs/part1.gif)
+![FirstImage](https://github.com/subhradeepwork/Renovaite-AiDrivenCADEditing/blob/2392721528d5c0dc1ed83fb8760ccc23f68fbc04/GIFs/part1.gif)
 
 - **Tech pillars:** Unity (runtime editor), IFC parsing, Qdrant vector search (via FastAPI), OpenAI tool-calling, robust normalization/validation/dispatch, safe preview/apply UX.
 - **Outcome:** A production-style pipeline from **prompt → tool call → validation → normalization → target resolution → preview → apply**, with clear extensibility and testability.
@@ -15,7 +15,7 @@ Instead of traditional document-centric retrieval, we index the 3D world itself:
 
 These records are embedded and stored in Qdrant, enabling both semantic search (“concrete walls with windows nearby”) and similarity expansion from a selected seed object (k-NN with top_k and threshold), with optional filters over IFC type/tags/numerics.
 
-![SecondImage](https://github.com/subhradeepwork/GenAiBuild/blob/abbbf482cedbc818ffd94a6e2ee635cb05e77fdd/GIFs/part2.gif)
+![SecondImage](https://github.com/subhradeepwork/Renovaite-AiDrivenCADEditing/blob/2392721528d5c0dc1ed83fb8760ccc23f68fbc04/GIFs/part2.gif)
 
 
 At inference, the LLM receives:
@@ -33,7 +33,7 @@ Finally, target resolution maps the selection to actual GameObjects (via registr
 
 The result is an operator-in-the-loop system that blends LLM flexibility with verifiable, IFC-grounded control—portable across scenes, auditable end-to-end, and easy to extend with new actions, retrieval features, or domain heuristics.
 
-![ThirdImage](https://github.com/subhradeepwork/GenAiBuild/blob/550c6c427d02f1de43fd91a959bea4287311a533/GIFs/part3.gif)
+![ThirdImage](https://github.com/subhradeepwork/Renovaite-AiDrivenCADEditing/blob/2392721528d5c0dc1ed83fb8760ccc23f68fbc04/GIFs/part3.gif)
 
 
 ---
